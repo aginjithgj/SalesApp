@@ -7,7 +7,7 @@
         <div class="container mt-4">
         <h2>Add a New Sale</h2>
         <div class="form-group">
-            <asp:DropDownList ID="ddlItemsInStock" CssClass="form-control" runat="server"></asp:DropDownList>
+            <asp:DropDownList ID="ddlItemsInStock" CssClass="form-control" ToolTip="" onfocus="checkStockDropDown();" runat="server"></asp:DropDownList>
             <asp:TextBox ID="txtSaleQuantity" CssClass="form-control mt-2" runat="server" placeholder="Quantity"></asp:TextBox>
             <asp:TextBox ID="txtSalePrice" CssClass="form-control mt-2" runat="server" placeholder="Price"></asp:TextBox>
 
@@ -28,6 +28,17 @@
         <button type="button" id="IdSalesButton" class="btn btn-success mt-3" runat="server" onserverclick="CompleteSale_Click">Complete Sale</button>
     </div>
 
+    <script type="text/javascript">
+    function checkStockDropDown() {
+        var ddl = document.getElementById('<%= ddlItemsInStock.ClientID %>');
+        if (ddl.options.length === 0) {
+            alert("Stock is empty. Please make a purchase to add items.");
+            ddl.blur();
+            IDPurchseLink.focus();
+
+        }
+    }
+    </script>
 
    
 </asp:Content>

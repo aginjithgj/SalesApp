@@ -40,7 +40,7 @@ namespace SalesApp
 
         protected void SearchItem_Click(object sender, EventArgs e)
         {
-            string searchQuery = searchItem.Value.Trim();
+            string searchQuery = IDsearchItem.Value.Trim();
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
@@ -53,8 +53,8 @@ namespace SalesApp
 
                     if (!reader.HasRows & searchQuery == "")
                     {
-                        ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('Please add Items in the system');", true);
-
+                        ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('Please add a new Items. Table is empty.');", true);
+                        IDAddItemBtn.Focus();
                     }
                     else if (!reader.HasRows)
                     {
@@ -80,8 +80,9 @@ namespace SalesApp
             {
 
                 DataTable dt = (DataTable)Session["PurchaseTable"];
-                if (ddlSearchResults.SelectedValue=="")
+                if (ddlSearchResults.SelectedValue == "")
                 {
+                    IDsearchItem.Focus();
                     throw new ArgumentException("Pleas search Item name.");
 
                 }
@@ -184,15 +185,21 @@ namespace SalesApp
                     txtNewItemName.Text = "";
                     throw new ArgumentException("Item Name cannot be empty.");
                 }
+
+                // Parsing input fields
                 decimal price = decimal.Parse(txtNewItemPrice.Text.Trim() == "" ? "0" : txtNewItemPrice.Text.Trim());
                 int quantity = int.Parse(txtQuantity.Text.Trim() == "" ? "0" : txtQuantity.Text.Trim());
                 decimal salesPrice = decimal.Parse(txtSalesPrice.Text.Trim() == "" ? "0" : txtSalesPrice.Text.Trim());
 
-
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT INTO Items (ItemName, Quantity, Price, SalesPrice) VALUES (@ItemName, @Quantity, @Price, @SalesPrice)";
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    // Step 1: Insert new item into Items table
+                    string insertItemQuery = @"
+                INSERT INTO Items (ItemName, Quantity, Price, SalesPrice) 
+                VALUES (@ItemName, @Quantity, @Price, @SalesPrice);
+                SELECT SCOPE_IDENTITY();"; // Get the inserted Item ID
+
+                    using (SqlCommand cmd = new SqlCommand(insertItemQuery, conn))
                     {
                         cmd.Parameters.AddWithValue("@ItemName", itemName);
                         cmd.Parameters.AddWithValue("@Quantity", quantity);
@@ -200,21 +207,47 @@ namespace SalesApp
                         cmd.Parameters.AddWithValue("@SalesPrice", salesPrice);
 
                         conn.Open();
-                        cmd.ExecuteNonQuery();
+
+                        // Retrieve the newly inserted item ID
+                        int newItemId = Convert.ToInt32(cmd.ExecuteScalar());
+
+                        // Step 2: Update Stock table if the quantity is greater than 0
+                        if (quantity > 0)
+                        {
+                            string updateStockQuery = @"
+                        IF EXISTS (SELECT 1 FROM Stock WHERE ItemId = @ItemId)
+                        BEGIN
+                            UPDATE Stock 
+                            SET Quantity = Quantity + @Quantity 
+                            WHERE ItemId = @ItemId;
+                        END
+                        ELSE
+                        BEGIN
+                            INSERT INTO Stock (ItemId, Quantity)
+                            VALUES (@ItemId, @Quantity);
+                        END";
+
+                            using (SqlCommand stockCmd = new SqlCommand(updateStockQuery, conn))
+                            {
+                                stockCmd.Parameters.AddWithValue("@ItemId", newItemId);
+                                stockCmd.Parameters.AddWithValue("@Quantity", quantity);
+                                stockCmd.ExecuteNonQuery();
+                            }
+                        }
+
                         conn.Close();
                     }
                 }
 
+                // Clear input fields
                 ClearNewItemDetails();
-
             }
             catch (Exception ex)
             {
-
                 ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('Error: {ex.Message}');", true);
-
             }
         }
+
 
         private void ClearNewItemDetails()
         {

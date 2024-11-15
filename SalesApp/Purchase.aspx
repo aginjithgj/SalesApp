@@ -6,9 +6,9 @@
     <div class="container mt-4">
         <h2>New Purchase</h2>
         <div class="form-group">
-            <input type="text" id="searchItem" class="form-control" placeholder="Search Item by Name" runat="server" />
+            <input type="text" ID="IDsearchItem" class="form-control" placeholder="Search Item by Name" runat="server" />
             <button type="button" class="btn btn-success mt-2" runat="server" onserverclick="SearchItem_Click">Search</button>
-            <button type="button" class="btn btn-info mt-2" data-toggle="modal" data-target="#addItemModal">Add New Item</button>
+            <button type="button" class="btn btn-info mt-2" data-toggle="modal" ID="IDAddItemBtn" runat="server" data-target="#addItemModal">Add New Item</button>
         </div>
 
         <div class="form-group">
@@ -22,7 +22,6 @@
         <h3  id="TableHead"  runat="server">Items in Current Purchase</h3>
         <asp:GridView ID="GridViewPurchase" CssClass="table table-bordered mt-3" AutoGenerateColumns="False" OnRowDeleting="GridViewPurchase_RowDeleting" runat="server">
             <Columns>
-                <%--<asp:BoundField DataField="ItemID"  InsertVisible="false" HeaderText="ID" />--%>
                 <asp:BoundField DataField="ItemName" HeaderText="Item Name" />
                 <asp:BoundField DataField="Quantity" HeaderText="Quantity" />
                 <asp:BoundField DataField="Price" HeaderText="Price" DataFormatString="{0:C}" />
@@ -60,6 +59,7 @@
            const ddlSearchResults = document.getElementById("<%= ddlSearchResults.ClientID %>");
            if (ddlSearchResults && ddlSearchResults.options.length === 0) {
                alert("No items available! Please add from Search.");
+               <%= IDsearchItem.ClientID %>.focus();
            }
        }
    </script>

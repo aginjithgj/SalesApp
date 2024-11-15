@@ -26,10 +26,13 @@ namespace SalesApp
         {
             try
             {
-                if (txtItemName.Text.Trim() == "")
+                // Validate Item Name
+                if (string.IsNullOrWhiteSpace(txtItemName.Text))
                 {
                     throw new ArgumentException("Item Name cannot be empty.");
                 }
+
+                // Parse input values
                 string itemName = txtItemName.Text.Trim();
                 int quantity = int.Parse(txtQuantity.Text.Trim() == "" ? "0" : txtQuantity.Text.Trim());
                 decimal price = decimal.Parse(txtPrice.Text.Trim() == "" ? "0" : txtPrice.Text.Trim());
@@ -37,8 +40,13 @@ namespace SalesApp
 
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT INTO Items (ItemName, Quantity, Price, SalesPrice) VALUES (@ItemName, @Quantity, @Price, @SalesPrice)";
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    // Step 1: Insert item into Items table
+                    string insertItemQuery = @"
+                INSERT INTO Items (ItemName, Quantity, Price, SalesPrice) 
+                VALUES (@ItemName, @Quantity, @Price, @SalesPrice);
+                SELECT SCOPE_IDENTITY();"; // Retrieve the new Item ID
+
+                    using (SqlCommand cmd = new SqlCommand(insertItemQuery, conn))
                     {
                         cmd.Parameters.AddWithValue("@ItemName", itemName);
                         cmd.Parameters.AddWithValue("@Quantity", quantity);
@@ -46,23 +54,47 @@ namespace SalesApp
                         cmd.Parameters.AddWithValue("@SalesPrice", salesPrice);
 
                         conn.Open();
-                        cmd.ExecuteNonQuery();
+                        // Get the newly inserted Item ID
+                        int newItemId = Convert.ToInt32(cmd.ExecuteScalar());
+
+                        // Step 2: Update Stock table if the quantity is greater than 0
+                        if (quantity > 0)
+                        {
+                            string updateStockQuery = @"
+                        IF EXISTS (SELECT 1 FROM Stock WHERE ItemId = @ItemId)
+                        BEGIN
+                            UPDATE Stock 
+                            SET Quantity = Quantity + @Quantity 
+                            WHERE ItemId = @ItemId;
+                        END
+                        ELSE
+                        BEGIN
+                            INSERT INTO Stock (ItemId, Quantity)
+                            VALUES (@ItemId, @Quantity);
+                        END";
+
+                            using (SqlCommand stockCmd = new SqlCommand(updateStockQuery, conn))
+                            {
+                                stockCmd.Parameters.AddWithValue("@ItemId", newItemId);
+                                stockCmd.Parameters.AddWithValue("@Quantity", quantity);
+                                stockCmd.ExecuteNonQuery();
+                            }
+                        }
+
                         conn.Close();
                     }
                 }
 
+                // Clear input fields and refresh item list
                 ClearInputs();
                 LoadItems();
-
             }
             catch (Exception ex)
             {
-
                 ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('Error: {ex.Message}');", true);
-
             }
-
         }
+
 
         private void LoadItems1()
         {

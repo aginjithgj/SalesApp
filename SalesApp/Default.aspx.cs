@@ -44,9 +44,20 @@ namespace SalesApp
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT i.Id, i.ItemName FROM Items i INNER JOIN Stock s ON i.Id = s.ItemId WHERE s.Quantity > 0";
+                    string query = "SELECT i.Id, i.ItemName FROM Items i INNER JOIN Stock s ON i.Id = s.ItemId WHERE s.Quantity > 0 AND i.Deleted = 0";
                     SqlDataAdapter da = new SqlDataAdapter(query, conn);
                     DataTable dt = new DataTable();
+
+                    // Assuming dt is filled with data from a database
+                    if (dt.Rows.Count == 0) // Check if the DataTable is empty
+                    {
+                        ddlItemsInStock.ToolTip = "Stock is empty. Please make purchases.";
+                    }
+                    else
+                    {
+                        ddlItemsInStock.ToolTip = "Select an item from the stock.";
+                    }
+
                     da.Fill(dt);
                     ddlItemsInStock.DataSource = dt;
                     ddlItemsInStock.DataTextField = "ItemName";

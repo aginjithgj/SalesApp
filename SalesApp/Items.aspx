@@ -28,58 +28,56 @@
             Visible="False"></asp:Label>
 
 
-        <asp:GridView 
-    ID="GridViewItems" 
-    CssClass="table table-bordered mt-3" 
-    AutoGenerateColumns="False" 
-    runat="server" 
-    DataKeyNames="ItemID"
-    OnRowEditing="GridViewItems_RowEditing"
-    OnRowUpdating="GridViewItems_RowUpdating"
-    OnRowDeleting="GridViewItems_RowDeleting"
-    OnRowCancelingEdit="GridViewItems_RowCancelingEdit">
-    
-    <Columns>
-        <asp:TemplateField HeaderText="Item Name">
-            <EditItemTemplate>
-                <asp:TextBox ID="txtItemName" runat="server" Text='<%# Bind("ItemName") %>' />
-            </EditItemTemplate>
-            <ItemTemplate>
-                <asp:Label ID="lblItemName" runat="server" Text='<%# Eval("ItemName") %>' />
-            </ItemTemplate>
-        </asp:TemplateField>
+        <asp:GridView
+            ID="GridViewItems"
+            CssClass="table table-bordered mt-3"
+            AutoGenerateColumns="False"
+            runat="server"
+            DataKeyNames="ItemID"
+            OnRowEditing="GridViewItems_RowEditing"
+            OnRowUpdating="GridViewItems_RowUpdating"
+            OnRowDeleting="GridViewItems_RowDeleting"
+            OnRowCancelingEdit="GridViewItems_RowCancelingEdit">
 
-        <asp:TemplateField HeaderText="Quantity">
-            <EditItemTemplate>
-                <asp:TextBox ID="txtQuantity" runat="server" Text='<%# Bind("Quantity") %>' />
-            </EditItemTemplate>
-            <ItemTemplate>
-                <asp:Label ID="lblQuantity" runat="server" Text='<%# Eval("Quantity") %>' />
-            </ItemTemplate>
-        </asp:TemplateField>
+            <Columns>
+                <asp:TemplateField HeaderText="Item Name">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtItemName" runat="server" Text='<%# Bind("ItemName") %>' />
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lblItemName" runat="server" Text='<%# Eval("ItemName") %>' />
+                    </ItemTemplate>
+                </asp:TemplateField>
 
-        <asp:TemplateField HeaderText="Price">
-            <EditItemTemplate>
-                <asp:TextBox ID="txtPrice" runat="server" Text='<%# Bind("Price") %>' />
-            </EditItemTemplate>
-            <ItemTemplate>
-                <asp:Label ID="lblPrice" runat="server" Text='<%# Eval("Price") %>' />
-            </ItemTemplate>
-        </asp:TemplateField>
+                <asp:TemplateField HeaderText="Quantity">
 
-        <asp:TemplateField HeaderText="Sales Price">
-            <EditItemTemplate>
-                <asp:TextBox ID="txtSalesPrice" runat="server" Text='<%# Bind("SalesPrice") %>' />
-            </EditItemTemplate>
-            <ItemTemplate>
-                <asp:Label ID="lblSalesPrice" runat="server" Text='<%# Eval("SalesPrice") %>' />
-            </ItemTemplate>
-        </asp:TemplateField>
+                    <ItemTemplate>
+                        <asp:Label ID="lblQuantity" runat="server" Text='<%# Eval("Quantity") %>' />
+                    </ItemTemplate>
+                </asp:TemplateField>
 
-        <asp:CommandField ShowEditButton="True" ShowDeleteButton="True" ButtonType="Button" />
+                <asp:TemplateField HeaderText="Price">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtPrice" runat="server" Text='<%# Bind("Price") %>' />
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lblPrice" runat="server" Text='<%# Eval("Price") %>' />
+                    </ItemTemplate>
+                </asp:TemplateField>
 
-    </Columns>
-</asp:GridView>
+                <asp:TemplateField HeaderText="Sales Price">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtSalesPrice" runat="server" Text='<%# Bind("SalesPrice") %>' />
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lblSalesPrice" runat="server" Text='<%# Eval("SalesPrice") %>' />
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:CommandField ShowEditButton="True" ShowDeleteButton="True" ButtonType="Button" />
+
+            </Columns>
+        </asp:GridView>
 
 
 

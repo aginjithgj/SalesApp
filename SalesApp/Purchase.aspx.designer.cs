@@ -15,13 +15,22 @@ namespace SalesApp
     {
 
         /// <summary>
-        /// searchItem control.
+        /// IDsearchItem control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText searchItem;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText IDsearchItem;
+
+        /// <summary>
+        /// IDAddItemBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton IDAddItemBtn;
 
         /// <summary>
         /// ddlSearchResults control.
