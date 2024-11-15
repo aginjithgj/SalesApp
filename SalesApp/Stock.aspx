@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SalesApp.Master" AutoEventWireup="true" CodeBehind="Stock.aspx.cs" Inherits="SalesApp.Stock" %>
+﻿<%@ Page Title="Sales App - Stock" Language="C#" MasterPageFile="~/SalesApp.Master" AutoEventWireup="true" CodeBehind="Stock.aspx.cs" Inherits="SalesApp.Stock" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">

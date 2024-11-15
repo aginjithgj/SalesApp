@@ -108,7 +108,6 @@
     <Compile Include="Items.aspx.designer.cs">
       <DependentUpon>Items.aspx</DependentUpon>
     </Compile>
-    <Compile Include="NoteFolder\CopyPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Purchase.aspx.cs">
       <DependentUpon>Purchase.aspx</DependentUpon>

@@ -1,11 +1,11 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SalesApp.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="SalesApp.Default" %>
+﻿<%@ Page Title="Sales App - New Sale" Language="C#" MasterPageFile="~/SalesApp.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="SalesApp.Default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
    
         <div class="container mt-4">
-        <h2>Record a New Sale</h2>
+        <h2>Add a New Sale</h2>
         <div class="form-group">
             <asp:DropDownList ID="ddlItemsInStock" CssClass="form-control" runat="server"></asp:DropDownList>
             <asp:TextBox ID="txtSaleQuantity" CssClass="form-control mt-2" runat="server" placeholder="Quantity"></asp:TextBox>

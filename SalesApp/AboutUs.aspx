@@ -34,7 +34,7 @@
                 <h4>Open-Source License</h4>
                 <p>
                     SalesApp is released under the <strong>MIT License</strong>, a permissive open-source license that allows anyone to use, modify, and distribute the software.
-                    We encourage contributions from the community to help enhance the project. You can find the source code on our <a href="https://github.com/your-repo/salesapp" target="_blank">GitHub repository</a>.
+                    We encourage contributions from the community to help enhance the project. You can find the source code on our <a href="https://github.com/aginjithgj/SalesApp" target="_blank">GitHub repository</a>.
                 </p>
 
                 <h4>About the Creator</h4>
@@ -49,7 +49,7 @@
                 </p>
                 <p>
                     <strong>Email:</strong> support@salesapp.com<br />
-                    <strong>GitHub:</strong> <a href="https://github.com/your-repo/salesapp" target="_blank">https://github.com/your-repo/salesapp</a><br />
+                    <strong>GitHub:</strong> <a href="https://github.com/aginjithgj/SalesApp" target="_blank">https://github.com/aginjithgj/SalesApp</a><br />
                     <strong>License:</strong> <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a>
                 </p>
             </div>
