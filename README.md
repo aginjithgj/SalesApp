@@ -74,10 +74,9 @@ Follow these steps to set up the SalesApp project on your local machine:
 
 ## Usage
 
-1. **Login**: Start the application, and log in using default credentials (admin:admin). You can update these credentials later.
-2. **Manage Products**: Navigate to the "Products" section to add or update product details.
-3. **Manage Purchases**: Use the "Purchases" page to add purchase details and update stock levels.
-4. **Sales Management**: Add sales transactions and review sales reports.
+1. **Manage Products**: Navigate to the "Item" section to add or update product details.
+2. **Manage Purchases**: Use the "Purchases" page to add purchase details and update stock levels.
+3. **Sales Management**: Add sales transactions and review sales reports.
 
 ## Soft Delete Mechanism
 
