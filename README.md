@@ -102,8 +102,8 @@ If you encounter any issues or bugs, please create an [issue](https://github.com
 
 ## Acknowledgements
 
-- **Creator**: Aginjith
-- **Copyright**: Aginjith © 2024. All rights reserved.
+- **Creator**: Aginjith G J
+- **Copyright**: Aginjith G J © 2024. All rights reserved.
 
 ## Open Source License
 
