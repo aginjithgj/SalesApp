@@ -6,7 +6,7 @@
 
 ## Overview
 
-**SalesApp** is a very basic sales and inventory management system designed to simplify the process of managing products, purchases, and sales for small to medium-sized businesses. This application allows users to keep track of stock levels, manage product details, and handle transactions seamlessly, all in one place.
+**SalesApp** is a sample sales and inventory management system designed to show the process of managing products, purchases, and sales for small to medium-sized businesses. This application allows users to keep track of stock levels, manage product details, and handle transactions seamlessly, all in one place.
 
 The project is developed using **ASP.NET** with a **SQL Server** backend, making it a reliable and robust solution for sales and inventory management.
 
